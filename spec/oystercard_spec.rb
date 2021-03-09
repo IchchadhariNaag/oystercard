@@ -20,6 +20,7 @@ describe Oystercard do
   end
 
   it 'can touch in at a station' do
+    subject.top_up(1)
     expect(subject.touch_in("Kennington")).to be true
   end
 
@@ -28,8 +29,13 @@ describe Oystercard do
   end
 
   it 'has a status to indicate when user is on a journey' do
+    subject.top_up(1)
     subject.touch_in("Oxford Circus")
     expect(subject.in_journey?).to be true
+  end
+
+  it 'has to have at least the minimum fare in balance to touch in' do
+    expect { subject.touch_in("Oval") }.to raise_error("You need at least #{Oystercard::MINIMUM} in balance to travel")
   end
 
 end
