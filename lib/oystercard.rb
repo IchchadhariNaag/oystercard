@@ -1,6 +1,8 @@
 class Oystercard
 
 attr_reader :balance
+attr_reader :entry_station
+
 CARD_LIMIT = 90
 MINIMUM = 1
 
@@ -14,21 +16,26 @@ MINIMUM = 1
     @balance += amount
   end
 
-  def deduct(amount)
-    @balance -= amount
-  end
-
   def touch_in(station)
     raise "You need at least #{MINIMUM} in balance to travel" if @balance < MINIMUM
+    @entry_station = station
     @status = true
   end
 
   def touch_out(station)
+    deduct
     @status = false
   end
 
   def in_journey?
     @status
   end
+
+private
+
+  def deduct
+    @balance -= MINIMUM
+  end
+
 
 end
