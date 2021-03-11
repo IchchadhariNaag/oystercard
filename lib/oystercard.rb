@@ -8,7 +8,7 @@ MINIMUM = 1
 
   def initialize()
     @balance = 0
-    @status = false
+    @entry_station = nil
   end
 
   def top_up(amount)
@@ -19,16 +19,16 @@ MINIMUM = 1
   def touch_in(station)
     raise "You need at least #{MINIMUM} in balance to travel" if @balance < MINIMUM
     @entry_station = station
-    @status = true
   end
 
   def touch_out(station)
     deduct
-    @status = false
+    @entry_station = nil
   end
 
   def in_journey?
-    @status
+    return true if @entry_station != nil
+    return false if @entry_station == nil
   end
 
 private
