@@ -63,8 +63,9 @@ I need to have the correct fare calculated
 |         |  penalty   |
 
 
+14.
 
-`Update your test suite to reflect a new Journey class`
+~~Update your test suite to reflect a new Journey class~~
 Create a new class Journey and move the functionality that relates to a journey from Oystercard to Journey
 Make sure all tests pass, all existing functionality is preserved
 The #fare method should return the minimum fare (for the moment), or the penalty fare of 6 if there was either no entry station or no exit station.

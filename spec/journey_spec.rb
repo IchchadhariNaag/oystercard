@@ -2,6 +2,9 @@ require 'journey'
 
 describe Journey do
 
+  let(:entry_station) { double :entry_station }
+  let(:test_journey) { Journey.new.entry_station = entry_station}
+
   describe 'has structure' do
 
     let(:exit_station) { double(:station) }
@@ -51,6 +54,16 @@ describe Journey do
     it 'checks if the previous journey was completed with both an entry and exit station' do
       subject.start_journey(entry_station)
       expect(subject.end_journey(exit_station)).to change { subject.journey_complete? }.to eq(true)
+    end
+
+  end
+
+  describe 'fare' do
+
+
+
+    it 'charges penalty fare' do
+      expects(test_journey.fare)to eq Journey::DEFAULT_PENALTY
     end
 
   end
